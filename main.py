@@ -1,101 +1,102 @@
 import change_temp
 import sys
+import json
 
 
-def menu_cwu():
-  dlugosc = 1
-  wybor_uzytkowanika = " "
+def menu_hot_water():
+  length = 1
+  user_choice = " "
 
-  while len(wybor_uzytkowanika) != dlugosc or not wybor_uzytkowanika.isdigit():
+  while len(user_choice) != length or not user_choice.isdigit():
     print("\nMenu CWU")
-    filename = 'change_temp.txt' 
+    filename = 'change_temp.json' 
     with open(filename, 'r') as f:
-      output = f.read()
-    print(f"Temperatura nastawiona - {output}") 
+      output = json.load(f)
+    print(f"Temperatura nastawiona - {output['hot_water']}")
     print("Temperatura w zbiorniku - 55")
     print("1 - Zmień temperaturę")
     print("2 - Powrót")
-    wybor_uzytkowanika = input("\nWybierz: ")
-    if wybor_uzytkowanika == "1":
-      change_temp.menu_cwu_zm_temp()
-      menu_cwu()
-    if wybor_uzytkowanika == "2":
-      menu_sterownika()
-    if wybor_uzytkowanika >= "3":
-      menu_cwu()
+    user_choice = input("\nWybierz: ")
+    if user_choice == "1":
+      change_temp.change_hot_water()
+      menu_hot_water()
+    if user_choice == "2":
+      menu_controller()
+    if user_choice >= "3":
+      menu_hot_water()
 
 
-def menu_grzejnikowe():
-  dlugosc = 1
-  wybor_uzytkowanika = " "
+def menu_heater():
+  length = 1
+  user_choice = " "
 
-  while len(wybor_uzytkowanika) != dlugosc or not wybor_uzytkowanika.isdigit():
+  while len(user_choice) != length or not user_choice.isdigit():
     print("\nMenu Ogrzewania grzejnikowego")
-    filename = 'change_temp2.txt' 
+    filename = 'change_temp.json' 
     with open(filename, 'r') as f:
-      output = f.read()
-    print(f"Temperatura nastawiona - {output}") 
+      output = json.load(f)
+    print(f"Temperatura nastawiona - {output['heater']}") 
     print("Temperatura zaworu - 51")
     print("1 - Zmień temperaturę")
     print("2 - Powrót")
-    wybor_uzytkowanika = input("\nWybierz: ")
-    if wybor_uzytkowanika == "1":
-      change_temp.menu_grzejnik_zm_temp()
-      menu_grzejnikowe()
-    if wybor_uzytkowanika == "2":
-      menu_sterownika()
-    if wybor_uzytkowanika >= "3":
-      menu_grzejnikowe()
+    user_choice = input("\nWybierz: ")
+    if user_choice == "1":
+      change_temp.change_heater_temp()
+      menu_heater()
+    if user_choice == "2":
+      menu_controller()
+    if user_choice >= "3":
+      menu_heater()
 
 
-def menu_podlogowe():
-  dlugosc = 1
-  wybor_uzytkowanika = " "
+def menu_floor():
+  length = 1
+  user_choice = " "
 
-  while len(wybor_uzytkowanika) != dlugosc or not wybor_uzytkowanika.isdigit():
+  while len(user_choice) != length or not user_choice.isdigit():
     print("\nMenu Ogrzewania podłogowego")
-    filename = 'change_temp3.txt' 
+    filename = 'change_temp.json' 
     with open(filename, 'r') as f:
-      output = f.read()
-    print(f"Temperatura nastawiona - {output}") 
+      output = json.load(f)
+    print(f"Temperatura nastawiona - {output['floor']}") 
     print("Temperatura zaworu - 30")
     print("1 - Zmień temperaturę")
     print("2 - Powrót")
-    wybor_uzytkowanika = input("\nWybierz: ")
-    if wybor_uzytkowanika == "1":
-      change_temp.menu_podlogowe_zm_temp()
-      menu_podlogowe()
-    if wybor_uzytkowanika == "2":
-      menu_sterownika()
-    if wybor_uzytkowanika >= "3":
-      menu_podlogowe()
+    user_choice = input("\nWybierz: ")
+    if user_choice == "1":
+      change_temp.change_floor_temp()
+      menu_floor()
+    if user_choice == "2":
+      menu_controller()
+    if user_choice >= "3":
+      menu_floor()
 
 
-def menu_sterownika():
-  dlugosc = 1
-  wybor_uzytkowanika = " "
+def menu_controller():
+  length = 1
+  user_choice = " "
 
-  while len(wybor_uzytkowanika) != dlugosc or not wybor_uzytkowanika.isdigit():
+  while len(user_choice) != length or not user_choice.isdigit():
     print("\n---Menu główne---")
     print("0 - CWU")
     print("1 - Ogrzewanie grzejniowe")
     print("2 - Ogrzewanie podłogowe")
     print("3 - Wyjście")
-    wybor_uzytkowanika = input("\nWybierz: ")
+    user_choice = input("\nWybierz: ")
 
-  if wybor_uzytkowanika == "0":
-    menu_cwu()
+  if user_choice == "0":
+    menu_hot_water()
 
-  if wybor_uzytkowanika == "1":
-    menu_grzejnikowe()
+  if user_choice == "1":
+    menu_heater()
 
-  if wybor_uzytkowanika == "2":
-    menu_podlogowe()
+  if user_choice == "2":
+    menu_floor()
   
-  if wybor_uzytkowanika == "3":
+  if user_choice == "3":
     sys.exit()
 
-  if wybor_uzytkowanika >="4":
-    menu_sterownika()
+  if user_choice >="4":
+    menu_controller()
   
-menu_sterownika()
+menu_controller()

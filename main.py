@@ -12,8 +12,8 @@ def menu_hot_water():
     filename = 'change_temp.json' 
     with open(filename, 'r') as f:
       output = json.load(f)
-    print(f"Temperatura nastawiona - {output['hot_water']}")
-    print("Temperatura w zbiorniku - 55")
+    print(f"Temperatura nastawiona - {degree_format(output['hot_water'])}")
+    print("Temperatura w zbiorniku - 55°C")
     print("1 - Zmień temperaturę")
     print("2 - Powrót")
     user_choice = input("\nWybierz: ")
@@ -35,8 +35,8 @@ def menu_heater():
     filename = 'change_temp.json' 
     with open(filename, 'r') as f:
       output = json.load(f)
-    print(f"Temperatura nastawiona - {output['heater']}") 
-    print("Temperatura zaworu - 51")
+    print(f"Temperatura nastawiona - {degree_format(output['heater'])}") 
+    print("Temperatura zaworu - 51°C")
     print("1 - Zmień temperaturę")
     print("2 - Powrót")
     user_choice = input("\nWybierz: ")
@@ -58,8 +58,8 @@ def menu_floor():
     filename = 'change_temp.json' 
     with open(filename, 'r') as f:
       output = json.load(f)
-    print(f"Temperatura nastawiona - {output['floor']}") 
-    print("Temperatura zaworu - 30")
+    print(f"Temperatura nastawiona - {degree_format(output['floor'])}") 
+    print("Temperatura zaworu - 30°C")
     print("1 - Zmień temperaturę")
     print("2 - Powrót")
     user_choice = input("\nWybierz: ")
@@ -70,6 +70,10 @@ def menu_floor():
       menu_controller()
     if user_choice >= "3":
       menu_floor()
+
+
+def degree_format(a):
+  return a + '°C'
 
 
 def menu_controller():
@@ -96,7 +100,7 @@ def menu_controller():
   if user_choice == "3":
     sys.exit()
 
-  if user_choice >="4":
+  if user_choice >= "4":
     menu_controller()
   
 menu_controller()
